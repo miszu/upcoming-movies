@@ -7,7 +7,8 @@
              xmlns:converters="clr-namespace:Movies.Converters;assembly=Movies"
              prism:ViewModelLocator.AutowireViewModel="True" 
              x:Class="Movies.Views.UpcomingMoviesPage"
-             Title="Upcoming movies">
+             Title="Upcoming movies"
+             BackgroundColor="Black">
         <ContentPage.Resources>
             <ResourceDictionary>
                 <converters:StringsArrayToCSVConverter x:Key="StringsArrayToCSVConverter"/>
@@ -23,7 +24,7 @@
             </ResourceDictionary>
         </ContentPage.Resources>
         <ContentPage.Content>
-            <ListView x:Name="MoviesList" ItemsSource="{Binding UpcomingMovies}" SeparatorVisibility="None" RowHeight="150">
+            <ListView x:Name="MoviesList" ItemsSource="{Binding UpcomingMovies}" SeparatorVisibility="None" RowHeight="150" BackgroundColor="Transparent">
                 <ListView.Behaviors>
                      <behaviors:EventToCommandBehavior EventName="ItemTapped" 
                                                Command="{Binding MovieSelectedCommand}"
