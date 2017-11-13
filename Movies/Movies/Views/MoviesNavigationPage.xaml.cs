@@ -2,9 +2,9 @@
 
 namespace Movies.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class MoviesNavigationPage : NavigationPage
     {
-        public MainPage()
+        public MoviesNavigationPage()
         {
             InitializeComponent();
         }

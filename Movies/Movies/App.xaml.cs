@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
-using Prism.Unity;
+﻿using Prism.Unity;
 using Movies.Views;
 
 namespace Movies
 {
     public partial class App : PrismApplication
     {
+        public App() : base(null) { }
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            await NavigationService.NavigateAsync($"{nameof(MoviesNavigationPage)}/{nameof(UpcomingMoviesPage)}"); 
         }
 
         protected override void RegisterTypes()
         {
-            Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<MoviesNavigationPage>();
+            Container.RegisterTypeForNavigation<UpcomingMoviesPage>();
+            Container.RegisterTypeForNavigation<MovieDetailsPage>();
         }
     }
 }
-
