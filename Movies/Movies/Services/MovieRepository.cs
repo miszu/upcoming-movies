@@ -12,7 +12,10 @@ namespace Movies.Services
         {
             //TODO download from the backend
             var titles = new[] { "Pulp Fiction", "Inspector Gadget", "Downsizing" };
-            var movies = titles.Select(t => new Movie { Name = t, ReleaseDate = System.DateTime.Now, Genres = new [] { "Horror", "Action"},  PosterUrl = "https://images-na.ssl-images-amazon.com/images/M/MV5BMDdiYTUxOTMtZDA5Ni00ZTg0LWJiZTktZThjNTgyNzA0YzcwXkEyXkFqcGdeQXVyMjk3NTUyOTc@._CR233,7,713,713_UX402_UY402._SY201_SX201_AL_.jpg" });
+            var backdropUrl = "https://image.tmdb.org/t/p/w780/mVr0UiqyltcfqxbAUcLl9zWL8ah.jpg";
+            var posterUrl = "https://image.tmdb.org/t/p/w780/aMpyrCizvSdc0UIMblJ1srVgAEF.jpg";
+            var description = "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.";
+            var movies = titles.Select(t => new Movie { Name = t, Description = description + description + description + description + description, ReleaseDate = System.DateTime.Now, Genres = new [] { "Horror", "Action"},  PosterUrl = posterUrl, BackdropUrl = backdropUrl });
                                
             return Task.FromResult(movies);
         }

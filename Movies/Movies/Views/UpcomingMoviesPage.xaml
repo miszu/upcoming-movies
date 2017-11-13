@@ -4,11 +4,13 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
              xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" 
+             xmlns:converters="clr-namespace:Movies.Converters;assembly=Movies"
              prism:ViewModelLocator.AutowireViewModel="True" 
              x:Class="Movies.Views.UpcomingMoviesPage"
-             Title="{Binding Title}">
+             Title="Upcoming movies">
         <ContentPage.Resources>
             <ResourceDictionary>
+                <converters:StringsArrayToCSVConverter x:Key="StringsArrayToCSVConverter"/>
                 <Style x:Key="MovieGridStyle" TargetType="Grid">
                     <Setter Property="Margin" Value="10,5,10,20"/>
                 </Style>
@@ -39,8 +41,8 @@
                         <Image Source="{Binding PosterUrl}" Style="{StaticResource PosterImageStyle}"/>
                         <StackLayout Grid.Column="1" Style="{StaticResource MovieTextInfoContainerStyle}">
                             <Label Text="{Binding Name}" FontAttributes="Bold"/>
-                            <Label Text="{Binding ReleaseDate}"/>
-                            <Label Text="{Binding Genres}"/>
+                            <Label Text="{Binding ReleaseDate, StringFormat='{0:MMMM dd, yyyy}'}"/>
+                            <Label Text="{Binding Genres, Converter={StaticResource StringsArrayToCSVConverter}}"/>
                         </StackLayout>
                     </Grid>
                         </ViewCell>

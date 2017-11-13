@@ -2,10 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+             xmlns:converters="clr-namespace:Movies.Converters;assembly=Movies"
              prism:ViewModelLocator.AutowireViewModel="True" 
              x:Class="Movies.Views.MovieDetailsPage"
              Title="{Binding Title}">
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <converters:StringsArrayToCSVConverter x:Key="StringsArrayToCSVConverter"/>
+                <Style x:Key="BackdropMaskStyle" TargetType="Grid">
+                    <Setter Property="BackgroundColor" Value="Black"/>
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Style>
+
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="White"/>
+                    <Setter Property="Margin" Value="15"/>
+                </Style>
+            </ResourceDictionary>
+        </ContentPage.Resources>
         <ContentPage.Content>
-            <Grid></Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding Movie.BackdropUrl}" Aspect="AspectFill" Grid.RowSpan="2"/>
+                <Grid Style="{StaticResource BackdropMaskStyle}" Grid.RowSpan="2"/>
+
+                <Image Source="{Binding Movie.PosterUrl}" Margin="50"/>
+                <ScrollView Grid.Row="1">
+                    <StackLayout Margin="10">
+                        <Label Text="{Binding Movie.Genres, Converter={StaticResource StringsArrayToCSVConverter}}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                        <Label Text="{Binding Movie.Description}" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
         </ContentPage.Content>
 </ContentPage>
