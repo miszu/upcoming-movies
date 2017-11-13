@@ -3,14 +3,18 @@ using System.Collections.ObjectModel;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Movies.Utilities;
+using Movies.Interfaces;
+using Movies.Models;
+using Movies.Views;
 
 namespace Movies.ViewModels
 {
     public class UpcomingMoviesPageViewModel : BindableBase, INavigationAware
     {
         INavigationService _navigationService;
-        ObservableCollection<string> _upcomingMovies;
-        public ObservableCollection<string> UpcomingMovies
+        IMovieRepository _movieRepository;
+        ObservableCollection<Movie> _upcomingMovies;
+        public ObservableCollection<Movie> UpcomingMovies
         {
             get
             {
@@ -22,11 +26,13 @@ namespace Movies.ViewModels
             }
         }
 
-        public Command<string> MovieSelectedCommand { get; set; }
+        public Command<Movie> MovieSelectedCommand { get; set; }
 
-        public UpcomingMoviesPageViewModel(INavigationService navigationService)
+        public UpcomingMoviesPageViewModel(INavigationService navigationService, IMovieRepository movieRepository)
         {
             _navigationService = navigationService;
+            _movieRepository = movieRepository;
+
             SetUpMovieDetailsNavigation();
         }
 
@@ -41,24 +47,23 @@ namespace Movies.ViewModels
             
         }
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+        public async void OnNavigatingTo(NavigationParameters parameters)
         {
             if (UpcomingMovies == null)
             {
-                // TODO: move to service
-                var sampleMovies = new[] { "Pulp Fiction", "Inspector Gadget", "Downsizing" };
-                UpcomingMovies = new ObservableCollection<string>(sampleMovies);
+                var sampleMovies = await _movieRepository.GetMovies(100);
+                UpcomingMovies = new ObservableCollection<Movie>(sampleMovies);
             }
         }
 
         private void SetUpMovieDetailsNavigation()
         {
-            MovieSelectedCommand = new Command<string>(async (movie) =>
+            MovieSelectedCommand = new Command<Movie>(async (movie) =>
             {
                 var navigationParameters = new NavigationParameters();
                 navigationParameters.Add(NavigationParametersKeys.SelectedMovie.ToString(), movie);
 
-                await _navigationService.NavigateAsync("MovieDetailsPage", navigationParameters); 
+                await _navigationService.NavigateAsync(nameof(MovieDetailsPage), navigationParameters); 
             });
         }
     }

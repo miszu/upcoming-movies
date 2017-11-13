@@ -1,4 +1,5 @@
-﻿using Movies.Utilities;
+﻿using Movies.Models;
+using Movies.Utilities;
 using Prism.Mvvm;
 using Prism.Navigation;
 
@@ -7,6 +8,19 @@ namespace Movies.ViewModels
     public class MovieDetailsPageViewModel : BindableBase, INavigationAware
     {
         INavigationService _navigationService;
+
+        Movie _movie;
+        public Movie Movie
+        {
+            get
+            {
+                return _movie;
+            }
+            set
+            {
+                SetProperty(ref _movie, value);
+            }
+        }
 
         string _title;
         public string Title
@@ -38,10 +52,11 @@ namespace Movies.ViewModels
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
-            var selectedMovie = parameters[NavigationParametersKeys.SelectedMovie.ToString()] as string;
+            var selectedMovie = parameters[NavigationParametersKeys.SelectedMovie.ToString()] as Movie;
             if (selectedMovie != null)
             {
-                Title = selectedMovie;
+                Movie = selectedMovie;
+                Title = $"{Movie.Name} ({Movie.ReleaseDate.Year})";
             }
         }
     }
