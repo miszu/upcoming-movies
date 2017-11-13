@@ -11,7 +11,6 @@
                 <converters:StringsArrayToCSVConverter x:Key="StringsArrayToCSVConverter"/>
                 <Style x:Key="BackdropMaskStyle" TargetType="Grid">
                     <Setter Property="BackgroundColor" Value="Black"/>
-                    <Setter Property="Opacity" Value="0.7"/>
                 </Style>
 
                 <Style TargetType="Label">
@@ -28,10 +27,10 @@
                 </Grid.RowDefinitions>
 
                 <Image Source="{Binding Movie.BackdropUrl}" Aspect="AspectFill" Grid.RowSpan="2"/>
-                <Grid Style="{StaticResource BackdropMaskStyle}" Grid.RowSpan="2"/>
+                <Grid x:Name="BackdropMask" Style="{StaticResource BackdropMaskStyle}" Grid.RowSpan="2"/>
 
-                <Image Source="{Binding Movie.PosterUrl}" Margin="50"/>
-                <ScrollView Grid.Row="1">
+                <Image x:Name="PosterImage" Source="{Binding Movie.PosterUrl}" Margin="50" Opacity="0"/>
+                <ScrollView Grid.Row="1" x:Name="DetailsContainer" Opacity="0">
                     <StackLayout Margin="10">
                         <Label Text="{Binding Movie.Genres, Converter={StaticResource StringsArrayToCSVConverter}}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
                         <Label Text="{Binding Movie.Description}" HorizontalTextAlignment="Center"/>
