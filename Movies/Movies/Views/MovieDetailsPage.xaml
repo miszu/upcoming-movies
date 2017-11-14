@@ -22,15 +22,47 @@
         <ContentPage.Content>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
-                <Image Source="{Binding Movie.BackdropUrl}" Aspect="AspectFill" Grid.RowSpan="2"/>
-                <Grid x:Name="BackdropMask" Style="{StaticResource BackdropMaskStyle}" Grid.RowSpan="2"/>
+                <Image Source="{Binding Movie.BackdropUrl}" Aspect="AspectFill" Grid.RowSpan="3"/>
+                <Grid x:Name="BackdropMask" Style="{StaticResource BackdropMaskStyle}" Grid.RowSpan="3"/>
 
-                <Image x:Name="PosterImage" Source="{Binding Movie.PosterUrl}" Margin="50" Opacity="0"/>
-                <ScrollView Grid.Row="1" x:Name="DetailsContainer" Opacity="0">
+                <Image x:Name="PosterImage" Source="{Binding Movie.PosterUrl}" Margin="10" Opacity="0"/>
+
+                <Grid x:Name="IconDetailsContainer" Margin="30,0,30,0" Grid.Row="1" HorizontalOptions="Center" ColumnSpacing="75" Opacity="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label">
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="Image">
+                                <Setter Property="WidthRequest" Value="35"/>
+                                <Setter Property="HeightRequest" Value="35"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <StackLayout>
+                        <Image Source="ic_date_range_white" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="{Binding Movie.ReleaseDate, StringFormat='{0:d MMM yyyy}'}"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1">
+                        <Image Source="ic_trending_up_white" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="{Binding Movie.Popularity}"/>
+                    </StackLayout>
+                </Grid>
+            
+                <ScrollView Grid.Row="2" x:Name="DetailsContainer" Opacity="0">
                     <StackLayout Margin="10">
                         <Label Text="{Binding Movie.Genres, Converter={StaticResource StringsArrayToCSVConverter}}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
                         <Label Text="{Binding Movie.Description}" HorizontalTextAlignment="Center"/>

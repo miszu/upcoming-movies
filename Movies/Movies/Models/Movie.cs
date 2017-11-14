@@ -11,5 +11,6 @@ namespace Movies.Models
         public string BackdropUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
         public ICollection<string> Genres { get; set; }
+        public double Popularity { get; set; }
     }
 }

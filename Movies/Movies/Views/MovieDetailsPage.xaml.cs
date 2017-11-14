@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Movies.Views
 {
     public partial class MovieDetailsPage : ContentPage
     {
-        private const int PosterAnimationTime = 400;
+        private const uint PosterAnimationTime = 600;
         private const double BackdropTargetOpacity = 0.7;
 
         public MovieDetailsPage()
@@ -13,17 +14,17 @@ namespace Movies.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            BeginOpacityAnimations();
-            BeginTranslationAnimations();
+            await BeginOpacityAnimations();
         }
 
-        private void BeginOpacityAnimations()
+        private async Task BeginOpacityAnimations()
         {
-            PosterImage.FadeTo(1, PosterAnimationTime);
-            DetailsContainer.FadeTo(1, (uint) (2 * PosterAnimationTime));
+            await PosterImage.FadeTo(1, PosterAnimationTime);
+            DetailsContainer.FadeTo(1, 2 * PosterAnimationTime);
+            IconDetailsContainer.FadeTo(1, 2 * PosterAnimationTime);
             BackdropMask.FadeTo(BackdropTargetOpacity, 5 * PosterAnimationTime);
         }
 
