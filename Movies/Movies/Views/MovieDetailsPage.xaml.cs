@@ -54,6 +54,11 @@ namespace Movies.Views
                 }
                 else
                 {
+                    if (MainContainer.RowDefinitions.Count > 0)
+                    {
+                        return;
+                    }
+
                     MainContainer.ColumnDefinitions.Clear();
                     MainContainer.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
                     MainContainer.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
