@@ -26,7 +26,10 @@ namespace Movies.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
+            UINavigationBar.Appearance.BarTintColor = UIColor.Black;
+            UINavigationBar.Appearance.TintColor = UIColor.White;
+            UINavigationBar.Appearance.Translucent = true;
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });          
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
