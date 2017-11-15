@@ -6,6 +6,6 @@ namespace Movies.Interfaces
 {
     public interface IMovieRepository
     {
-        Task<IEnumerable<Movie>> GetMovies(int count, int startingFromMovieIndex = 0);
+        Task<IEnumerable<Movie>> GetMovies(int page);
     }
 }

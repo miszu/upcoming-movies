@@ -6,6 +6,8 @@ using Movies.Utilities;
 using Movies.Interfaces;
 using Movies.Models;
 using Movies.Views;
+using System;
+using System.Threading.Tasks;
 
 namespace Movies.ViewModels
 {
@@ -14,6 +16,8 @@ namespace Movies.ViewModels
         INavigationService _navigationService;
         IMovieRepository _movieRepository;
         ObservableCollection<Movie> _upcomingMovies;
+        int _nextPageOfMoviesToLoad = 1;
+
         public ObservableCollection<Movie> UpcomingMovies
         {
             get
@@ -36,7 +40,6 @@ namespace Movies.ViewModels
             SetUpMovieDetailsNavigation();
         }
 
-
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
 
@@ -51,8 +54,17 @@ namespace Movies.ViewModels
         {
             if (UpcomingMovies == null)
             {
-                var sampleMovies = await _movieRepository.GetMovies(100);
+                var sampleMovies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
                 UpcomingMovies = new ObservableCollection<Movie>(sampleMovies);
+            }
+        }
+
+        public async Task LoadMoreMovies()
+        {
+            var newMovies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
+            foreach (var newMovie in newMovies)
+            {
+                _upcomingMovies.Add(newMovie);
             }
         }
 

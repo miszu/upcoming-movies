@@ -23,14 +23,13 @@ namespace Movies.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<IEnumerable<Movie>> GetMovies(int count, int startingFromMovieIndex = 0)
+        public async Task<IEnumerable<Movie>> GetMovies(int page)
         {
             if (_genreNames == null)
             {
                 _genreNames = await GetGenreDictionary();
             }
 
-            var page = 1;
             var url = $"{ServerApiBase}/movie/upcoming?page={page}&language=en-US&api_key={ServerApiKey}";
             var response = await _httpClient.GetStringAsync(url);
             var upcomingMoviesDTOs = JsonConvert.DeserializeObject<UpcomingMoviesDTO>(response).Results;
