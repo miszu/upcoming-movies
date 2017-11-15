@@ -48,11 +48,12 @@
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Interfaces\IMovieRepository.cs" />
     <Compile Include="Services\MovieRepository.cs" />
-    <Compile Include="Converters\StringsArrayToCSVConverter.cs" />
+    <Compile Include="Converters\ImageUrlToCachedImageSourceConverter.cs" />
     <Compile Include="DTO\MovieDTO.cs" />
     <Compile Include="DTO\UpcomingMoviesDTO.cs" />
     <Compile Include="DTO\AllGenresDTO.cs" />
     <Compile Include="DTO\GenreDTO.cs" />
+    <Compile Include="Converters\StringsArrayToCSVConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

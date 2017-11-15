@@ -8,6 +8,7 @@ using Movies.Models;
 using Movies.Views;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Movies.ViewModels
 {
@@ -54,18 +55,25 @@ namespace Movies.ViewModels
         {
             if (UpcomingMovies == null)
             {
-                var sampleMovies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
+                var sampleMovies = await GetNextMoviesBatch();
                 UpcomingMovies = new ObservableCollection<Movie>(sampleMovies);
             }
         }
 
         public async Task LoadMoreMovies()
         {
-            var newMovies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
+            var newMovies = await GetNextMoviesBatch();
             foreach (var newMovie in newMovies)
             {
                 _upcomingMovies.Add(newMovie);
             }
+        }
+
+        private Task<IEnumerable<Movie>> GetNextMoviesBatch()
+        {
+            var movies = _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
+
+            return movies;
         }
 
         private void SetUpMovieDetailsNavigation()
