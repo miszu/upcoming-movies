@@ -19,7 +19,6 @@ List of movies | Searching | Error | Details
 
 # Screenshots of horizontal orientation
 
-
-List of movies | Searching
+iOS | Android
  --- | --- 
 ![iOS](Screenshots/ios_5.png?raw=true "iOS") | ![iOS](Screenshots/android_5.png?raw=true "Android")
