@@ -25,6 +25,7 @@
             </ResourceDictionary>
         </ContentPage.Resources>
         <ContentPage.Content>
+        <Grid>
             <ListView x:Name="MoviesList" ItemsSource="{Binding UpcomingMovies}" SeparatorVisibility="None" RowHeight="150" BackgroundColor="Transparent" CachingStrategy="RecycleElement">
                 <ListView.Behaviors>
                      <behaviors:EventToCommandBehavior EventName="ItemTapped" 
@@ -51,5 +52,15 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             </ListView>
+            <Frame x:Name="Toast" 
+                IsClippedToBounds="False"
+                HasShadow="True"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                BackgroundColor="Gray" Opacity="0">
+                <Label Text="{Binding ToastText}" VerticalOptions="End" HorizontalTextAlignment="Center" TextColor="White"/>
+                </Frame>
+            </Grid>
         </ContentPage.Content>
 </ContentPage>

@@ -18,6 +18,8 @@ namespace Movies.ViewModels
         IMovieRepository _movieRepository;
         ObservableCollection<Movie> _upcomingMovies;
         int _nextPageOfMoviesToLoad = 1;
+        public Action AnimateToast;
+        public Action<bool> SwitchRefreshVisibility;
 
         public ObservableCollection<Movie> UpcomingMovies
         {
@@ -28,6 +30,19 @@ namespace Movies.ViewModels
             set
             {
                 SetProperty(ref _upcomingMovies, value);
+            }
+        }
+
+        string _toastText;
+        public string ToastText
+        {
+            get
+            {
+                return _toastText;
+            }
+            set
+            {
+                SetProperty(ref _toastText, value);
             }
         }
 
@@ -55,25 +70,37 @@ namespace Movies.ViewModels
         {
             if (UpcomingMovies == null)
             {
-                var sampleMovies = await GetNextMoviesBatch();
-                UpcomingMovies = new ObservableCollection<Movie>(sampleMovies);
+                UpcomingMovies = new ObservableCollection<Movie>();
+                await LoadMoreMovies();
             }
         }
 
         public async Task LoadMoreMovies()
         {
-            var newMovies = await GetNextMoviesBatch();
-            foreach (var newMovie in newMovies)
+            IEnumerable<Movie> movies;
+            try
+            {
+                movies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad);
+            }
+            catch (Exception)
+            {
+                movies = null;
+            }
+
+            SwitchRefreshVisibility?.Invoke(movies == null);
+
+            if (movies == null)
+            {
+                ToastText = "No internet = no movies. Please turn it on.";
+                AnimateToast?.Invoke();
+                return;
+            }
+
+            _nextPageOfMoviesToLoad++;
+            foreach (var newMovie in movies)
             {
                 _upcomingMovies.Add(newMovie);
             }
-        }
-
-        private Task<IEnumerable<Movie>> GetNextMoviesBatch()
-        {
-            var movies = _movieRepository.GetMovies(_nextPageOfMoviesToLoad++);
-
-            return movies;
         }
 
         private void SetUpMovieDetailsNavigation()

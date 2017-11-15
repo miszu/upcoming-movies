@@ -125,6 +125,10 @@
     <ImageAsset Include="Resources\Images.xcassets\ic_trending_up_white.imageset\ic_trending_up_white.png" />
     <ImageAsset Include="Resources\Images.xcassets\ic_trending_up_white.imageset\ic_trending_up_white_2x.png" />
     <ImageAsset Include="Resources\Images.xcassets\ic_trending_up_white.imageset\ic_trending_up_white_3x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white_2x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
