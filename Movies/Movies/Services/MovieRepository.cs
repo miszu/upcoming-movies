@@ -33,7 +33,7 @@ namespace Movies.Services
 
             var url = $"{ServerApiBase}/movie/upcoming?page={page}&language=en-US&api_key={ServerApiKey}";
             var response = await _httpClient.GetStringAsync(url);
-            var upcomingMoviesDTOs = JsonConvert.DeserializeObject<UpcomingMoviesDTO>(response).Results;
+            var upcomingMoviesDTOs = JsonConvert.DeserializeObject<MoviesDTO>(response).Results;
             var upcomingMovies = upcomingMoviesDTOs.Select(dto => GetMovieFromDto(dto));
 
             return upcomingMovies;
@@ -48,8 +48,7 @@ namespace Movies.Services
 
             var url = $"{ServerApiBase}/search/movie?api_key={ServerApiKey}&language=en-US&query={Uri.EscapeUriString(query)}&page=1&include_adult=false";
             var response = await _httpClient.GetStringAsync(url);
-            //TODO change upcoming title
-            var moviesDTOs = JsonConvert.DeserializeObject<UpcomingMoviesDTO>(response).Results;
+            var moviesDTOs = JsonConvert.DeserializeObject<MoviesDTO>(response).Results;
             var movies = moviesDTOs.Select(dto => GetMovieFromDto(dto));
 
             return movies;

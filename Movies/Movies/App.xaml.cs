@@ -20,7 +20,6 @@ namespace Movies
 
         protected override void RegisterTypes()
         {
-            // TODO: move to class with registrations
             Container.RegisterType<IMovieRepository, MovieRepository>();
 
             Container.RegisterTypeForNavigation<MoviesNavigationPage>();

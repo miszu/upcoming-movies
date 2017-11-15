@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Movies.DTO
 {
     [DataContract]
-    public class UpcomingMoviesDTO
+    public class MoviesDTO
     {
         [DataMember(Name = "results")]
         public IList<MovieDTO> Results { get; set; }
