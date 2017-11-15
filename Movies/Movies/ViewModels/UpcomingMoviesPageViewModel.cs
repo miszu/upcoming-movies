@@ -9,6 +9,7 @@ using Movies.Views;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Movies.ViewModels
 {
@@ -16,20 +17,23 @@ namespace Movies.ViewModels
     {
         INavigationService _navigationService;
         IMovieRepository _movieRepository;
-        ObservableCollection<Movie> _upcomingMovies;
         int _nextPageOfMoviesToLoad = 1;
         public Action AnimateToast;
         public Action<bool> SwitchRefreshVisibility;
 
-        public ObservableCollection<Movie> UpcomingMovies
+        string _previousSearchQuery = "";
+        IEnumerable<Movie> _copyOfPreSearchMovies;
+        ObservableCollection<Movie> _movieList;
+
+        public ObservableCollection<Movie> MovieList
         {
             get
             {
-                return _upcomingMovies;
+                return _movieList;
             }
             set
             {
-                SetProperty(ref _upcomingMovies, value);
+                SetProperty(ref _movieList, value);
             }
         }
 
@@ -46,14 +50,41 @@ namespace Movies.ViewModels
             }
         }
 
+        string _searchText;
+        public string SearchText
+        {
+            get
+            {
+                return _searchText;
+            }
+            set
+            {
+                SetProperty(ref _searchText, value);
+            }
+        }
+
+        bool _isSearchingMode;
+        public bool IsSearchingMode
+        {
+            get
+            {
+                return _isSearchingMode;
+            }
+            set
+            {
+                SetProperty(ref _isSearchingMode, value);
+            }
+        }
+
         public Command<Movie> MovieSelectedCommand { get; set; }
+        public Command<string> SearchTextChangedCommand { get; set; }
 
         public UpcomingMoviesPageViewModel(INavigationService navigationService, IMovieRepository movieRepository)
         {
             _navigationService = navigationService;
             _movieRepository = movieRepository;
 
-            SetUpMovieDetailsNavigation();
+            SetUpCommands();
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -68,9 +99,9 @@ namespace Movies.ViewModels
 
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
-            if (UpcomingMovies == null)
+            if (MovieList == null)
             {
-                UpcomingMovies = new ObservableCollection<Movie>();
+                MovieList = new ObservableCollection<Movie>();
                 await LoadMoreMovies();
             }
         }
@@ -80,7 +111,14 @@ namespace Movies.ViewModels
             IEnumerable<Movie> movies;
             try
             {
-                movies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad);
+                if (IsSearchingMode)
+                {
+                    movies = await _movieRepository.FindMovies(SearchText);
+                }
+                else
+                {
+                    movies = await _movieRepository.GetMovies(_nextPageOfMoviesToLoad);
+                }
             }
             catch (Exception)
             {
@@ -96,14 +134,22 @@ namespace Movies.ViewModels
                 return;
             }
 
-            _nextPageOfMoviesToLoad++;
+            if (IsSearchingMode)
+            {
+                MovieList.Clear();
+            }
+            else
+            {
+                _nextPageOfMoviesToLoad++;
+            }
+
             foreach (var newMovie in movies)
             {
-                _upcomingMovies.Add(newMovie);
+                MovieList.Add(newMovie);
             }
         }
 
-        private void SetUpMovieDetailsNavigation()
+        private void SetUpCommands()
         {
             MovieSelectedCommand = new Command<Movie>(async (movie) =>
             {
@@ -112,6 +158,37 @@ namespace Movies.ViewModels
 
                 await _navigationService.NavigateAsync(nameof(MovieDetailsPage), navigationParameters); 
             });
+
+            SearchTextChangedCommand = new Command<string>(async (newText) =>
+            {
+                if (string.IsNullOrWhiteSpace(newText) || _previousSearchQuery.Trim() == newText.Trim())
+                {
+                    return;
+                }
+
+                await LoadMoreMovies();
+            });
+        }
+
+        public void SearchSelected()
+        {
+            SearchText = "";
+            IsSearchingMode = !IsSearchingMode;
+
+            if (IsSearchingMode)
+            {
+                _previousSearchQuery = "";
+                _copyOfPreSearchMovies = MovieList.ToList();
+                MovieList.Clear();
+            }
+            else
+            {
+                MovieList.Clear();
+                foreach (var movieCopy in _copyOfPreSearchMovies)
+                {
+                    MovieList.Add(movieCopy);
+                }
+            }
         }
     }
 }

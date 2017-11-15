@@ -53,10 +53,16 @@ namespace Movies.ViewModels
         public void OnNavigatingTo(NavigationParameters parameters)
         {
             var selectedMovie = parameters[NavigationParametersKeys.SelectedMovie.ToString()] as Movie;
+
             if (selectedMovie != null)
             {
                 Movie = selectedMovie;
-                Title = $"{Movie.Name} ({Movie.ReleaseDate.Year})";
+                Title = Movie.Name;
+
+                if (Movie.ReleaseDate.HasValue)
+                {
+                    Title += $" ({Movie.ReleaseDate.Value.Year})";
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Movies.Views
     public partial class UpcomingMoviesPage : ContentPage
     {
         UpcomingMoviesPageViewModel _viewModel;
-        uint _toastTime = 2 * 1000;
+        uint _toastTime = 3 * 1000;
 
         public UpcomingMoviesPage()
         {
@@ -17,11 +17,16 @@ namespace Movies.Views
             MoviesList.ItemAppearing += MoviesList_ItemAppearing;
             _viewModel.AnimateToast = AnimateToast;
             _viewModel.SwitchRefreshVisibility = SwitchRefreshVisibility;
+
+            ToolbarItems.Add(new ToolbarItem("Search", "ic_search_white", async () =>
+            {
+                _viewModel.SearchSelected();
+            }));
         }
 
         async void MoviesList_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            if (e.Item == _viewModel.UpcomingMovies[_viewModel.UpcomingMovies.Count - 1])
+            if (_viewModel.IsSearchingMode == false && e.Item == _viewModel.MovieList[_viewModel.MovieList.Count - 1])
             {
                 await _viewModel.LoadMoreMovies();
             }
@@ -36,19 +41,24 @@ namespace Movies.Views
         {
             if (shouldRefreshBeVisible)
             {
-                if (ToolbarItems.Count == 1)
+                if (ToolbarItems.Count == 2)
                 {
                     return;
                 }
 
-                ToolbarItems.Add(new ToolbarItem("Search", "ic_refresh_white", async () =>
+                ToolbarItems.Add(new ToolbarItem("Refresh", "ic_refresh_white", async () =>
                 {
                     await _viewModel.LoadMoreMovies();
                 }));
             }
             else
             {
-                ToolbarItems.Clear();
+                if (ToolbarItems.Count == 1)
+                {
+                    return;
+                }
+
+                ToolbarItems.RemoveAt(1);
             }
         }
     }

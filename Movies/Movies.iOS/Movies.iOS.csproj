@@ -129,6 +129,10 @@
     <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white.png" />
     <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white_2x.png" />
     <ImageAsset Include="Resources\Images.xcassets\ic_refresh_white.imageset\ic_refresh_white_3x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_search_white.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_search_white.imageset\ic_search_white.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_search_white.imageset\ic_search_white_2x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\ic_search_white.imageset\ic_search_white_3x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />

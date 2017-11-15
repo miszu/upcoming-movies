@@ -26,7 +26,18 @@
         </ContentPage.Resources>
         <ContentPage.Content>
         <Grid>
-            <ListView x:Name="MoviesList" ItemsSource="{Binding UpcomingMovies}" SeparatorVisibility="None" RowHeight="150" BackgroundColor="Transparent" CachingStrategy="RecycleElement">
+             <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            <Entry x:Name="SearchQuery" Text="{Binding SearchText}" IsVisible="{Binding IsSearchingMode}" Margin="5,10,5,10" Placeholder="Movie title" PlaceholderColor = "Gray" BackgroundColor="White" TextColor="Black">
+               <Entry.Behaviors>
+                     <behaviors:EventToCommandBehavior EventName="TextChanged" 
+                                               Command="{Binding SearchTextChangedCommand}"
+                                               EventArgsParameterPath="NewTextValue" />
+                </Entry.Behaviors>
+            </Entry>
+            <ListView x:Name="MoviesList" Grid.Row="1" ItemsSource="{Binding MovieList}" SeparatorVisibility="None" RowHeight="150" BackgroundColor="Transparent" CachingStrategy="RecycleElement">
                 <ListView.Behaviors>
                      <behaviors:EventToCommandBehavior EventName="ItemTapped" 
                                                Command="{Binding MovieSelectedCommand}"
@@ -58,7 +69,7 @@
                 CornerRadius="10"
                 HorizontalOptions="Center"
                 VerticalOptions="End"
-                BackgroundColor="Gray" Opacity="0">
+                BackgroundColor="Gray" Opacity="0" Grid.RowSpan="2">
                 <Label Text="{Binding ToastText}" VerticalOptions="End" HorizontalTextAlignment="Center" TextColor="White"/>
                 </Frame>
             </Grid>

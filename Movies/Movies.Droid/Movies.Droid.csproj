@@ -138,6 +138,11 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_refresh_white.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_refresh_white.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_refresh_white.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_search_white.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_search_white.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_search_white.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_search_white.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_search_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
