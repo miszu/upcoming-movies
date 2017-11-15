@@ -10,13 +10,16 @@
 - [x] Possibility to retry web request which failed due to any reason
 - [x] Movie searching
 
-# Screenshots for iOS
+# Screenshots for iOS and Android
 
-![iOS](Screenshots/ios_1.png?raw=true "iOS") | ![iOS](Screenshots/ios_2.png?raw=true "iOS") | ![iOS](Screenshots/ios_3.png?raw=true "iOS")
-![iOS](Screenshots/ios_4.png?raw=true "iOS") | ![iOS](Screenshots/ios_5.png?raw=true "iOS") | -
+List of movies | Searching | Error | Details
+ --- | --- | --- | ---
+![iOS](Screenshots/ios_1.png?raw=true "iOS") | ![iOS](Screenshots/ios_2.png?raw=true "iOS") | ![iOS](Screenshots/ios_3.png?raw=true "iOS")| ![iOS](Screenshots/ios_4.png?raw=true "iOS")
+![Android](Screenshots/android_1.png?raw=true "Android") | ![Android](Screenshots/android_2.png?raw=true "Android") | ![Android](Screenshots/android_3.png?raw=true "Android")| ![Android](Screenshots/android_4.png?raw=true "Android")
+
+# Screenshots of horizontal orientation
 
 
-# Screenshots for Android
-
-![Android](Screenshots/android_1.png?raw=true "Android") | ![iOS](Screenshots/android_2.png?raw=true "Android") | ![Android](Screenshots/android_3.png?raw=true "Android")
-![Android](Screenshots/android_4.png?raw=true "Android") | ![iOS](Screenshots/android_5.png?raw=true "Android") | -
+List of movies | Searching
+ --- | --- 
+![iOS](Screenshots/ios_5.png?raw=true "iOS") | ![iOS](Screenshots/android_5.png?raw=true "Android")
