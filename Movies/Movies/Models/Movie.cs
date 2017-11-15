@@ -11,9 +11,9 @@ namespace Movies.Models
         public string BackdropUrl { get; private set; }
         public DateTime ReleaseDate { get; private set; }
         public ICollection<string> Genres { get; private set; }
-        public double Popularity { get; private set; }
+        public int Popularity { get; private set; }
 
-        public Movie(string name, string description, string posterUrl, string backdropUrl, string releaseDate, ICollection<string> genres, double popularity)
+        public Movie(string name, string description, string posterUrl, string backdropUrl, string releaseDate, ICollection<string> genres, int popularity)
         {
             Name = name;
             Description = description;

@@ -22,7 +22,7 @@
         <ContentPage.Content>
             <Grid x:Name="MainContainer">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
@@ -38,7 +38,7 @@
                     <Grid HorizontalOptions="Center" x:Name="IconsDetailsContainer" ColumnSpacing="50" Margin="30,0,30,10" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             
                             <Grid.Resources>
@@ -48,8 +48,8 @@
                                         <Setter Property="HorizontalTextAlignment" Value="Center"/>
                                     </Style>
                                     <Style TargetType="Image">
-                                        <Setter Property="WidthRequest" Value="35"/>
-                                        <Setter Property="HeightRequest" Value="35"/>
+                                        <Setter Property="WidthRequest" Value="30"/>
+                                        <Setter Property="HeightRequest" Value="30"/>
                                     </Style>
                                 </ResourceDictionary>
                             </Grid.Resources>

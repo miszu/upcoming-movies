@@ -54,7 +54,7 @@ namespace Movies.Services
             var posterUrl = $"{ImageBaseUrl}{movieDTO.PosterPath}";
             var backdropUrl = $"{ImageBaseUrl}{movieDTO.BackdropPath}";
 
-            return new Movie(movieDTO.Title, movieDTO.Overview, posterUrl, backdropUrl, movieDTO.ReleaseDate, genresNames, movieDTO.Popularity);
+            return new Movie(movieDTO.Title, movieDTO.Overview, posterUrl, backdropUrl, movieDTO.ReleaseDate, genresNames, (int) movieDTO.Popularity);
         }
     }
 }

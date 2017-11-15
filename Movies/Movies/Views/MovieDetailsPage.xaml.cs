@@ -60,7 +60,7 @@ namespace Movies.Views
                     }
 
                     MainContainer.ColumnDefinitions.Clear();
-                    MainContainer.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
+                    MainContainer.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
                     MainContainer.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
 
                     MainContainer.Children.Remove(DetailsContainer);
