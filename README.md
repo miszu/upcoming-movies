@@ -3,6 +3,11 @@
 - Prism: fantastic MVVM library making things like View-ViewModel binding, ViewModel navigation etc a trivial task
 - Unity: IoC container
 
+# How to run
+- open in Visual Studio / Xamarin Studio
+- select android/ios project as a startup project
+- build and deploy to your device/emulator
+
 # Tasks
 - [x] List of upcoming movies
 - [x] Details of selected movie
