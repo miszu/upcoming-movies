@@ -24,9 +24,11 @@ namespace Movies.Views
 
         private async Task BeginOpacityAnimations()
         {
-            await PosterImage.FadeTo(1, PosterAnimationTime);
-            DetailsContainer.FadeTo(1, 2 * PosterAnimationTime);
-            BackdropMask.FadeTo(BackdropTargetOpacity, 5 * PosterAnimationTime);
+            var fadePoster = PosterImage.FadeTo(1, PosterAnimationTime);
+            var fadeContainer = DetailsContainer.FadeTo(1, 2 * PosterAnimationTime);
+            var fadeBackground = BackdropMask.FadeTo(BackdropTargetOpacity, 5 * PosterAnimationTime);
+
+            await Task.WhenAll(fadePoster, fadeContainer, fadeBackground);    
         }
 
         protected override void OnSizeAllocated(double width, double height)

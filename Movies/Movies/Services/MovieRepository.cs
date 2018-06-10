@@ -7,6 +7,7 @@ using Movies.DTO;
 using Movies.Interfaces;
 using Movies.Models;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace Movies.Services
 {
