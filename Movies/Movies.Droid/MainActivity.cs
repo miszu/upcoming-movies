@@ -2,7 +2,9 @@
 using Android.Content.PM;
 using Android.OS;
 using Prism.Unity;
-using Microsoft.Practices.Unity;
+using Prism;
+using Unity;
+using Prism.Ioc;
 
 namespace Movies.Droid
 {
@@ -24,6 +26,10 @@ namespace Movies.Droid
         public void RegisterTypes(IUnityContainer container)
         {
 
+        }
+
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
         }
     }
 }

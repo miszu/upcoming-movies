@@ -4,9 +4,10 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-
 using Prism.Unity;
-using Microsoft.Practices.Unity;
+using Prism;
+using Unity;
+using Prism.Ioc;
 
 namespace Movies.iOS
 {
@@ -41,6 +42,10 @@ namespace Movies.iOS
         public void RegisterTypes(IUnityContainer container)
         {
 
+        }
+
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
         }
     }
 }
